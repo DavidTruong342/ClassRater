@@ -26,8 +26,53 @@ public class StudentTest {
 	}
 	
 	@Test
-	public void testCompareTo() {
-		fail("Not yet implemented");
+	public void testCompareTo() throws NameException {
+		Student firstStudent = new Student("x", "y", 2);
+		Student secondStudent = new Student("x", "y", 3);
+		
+		int actual = secondStudent.compareTo(firstStudent);
+		//should be bigger than zero
+		boolean result = false;
+		if(actual > 0) {
+			result = true;
+		}
+		assertTrue(result);
+		
+		Student student = new Student("x", "y", 5);
+		
+		result = false;
+		actual = secondStudent.compareTo(student);
+		//should be less than zero
+		if(actual < 0) {
+			result = true;
+		}
+		assertTrue(result);
+		
+		Student studentSame = new Student("x", "y", 3);
+		
+		result = false;
+		actual = secondStudent.compareTo(studentSame);
+		//should be zero
+		if(actual == 0) {
+			result = true;
+		}
+		assertTrue(result);
 	}
 
+	@Test
+	public void testGet() {
+		Integer expected = 4;
+		Integer rating = expected;
+		String firstName = "Alex";
+		String lastName = "Bo";
+		Student s;
+		try {
+			s = new Student(firstName, lastName, rating);
+			Integer actual = s.getRating();
+			assertEquals(expected, actual);
+		} catch (NameException e) {
+			fail();
+		}
+		
+	}
 }
